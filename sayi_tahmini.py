@@ -2,7 +2,7 @@ import random
 
 def oyun_oyna():
     # Bu fonksiyon her oyunu başlatacak ve deneme sayısını geri döndürecek.
-    aralik = random.randint(1, 99)
+    tutulansayi = random.randint(1, 99)
     deneme = 0
 
     while True:
@@ -16,10 +16,10 @@ def oyun_oyna():
             return None  # Kullanıcı çıkış yapmak istiyorsa, None döndür
 
         deneme += 1
-        if secim == aralik:
-            print(f"Tebrikler! {deneme}. denemede doğru cevabı bildiniz: {aralik}")
+        if secim == tutulansayi:
+            print(f"Tebrikler! {deneme}. denemede doğru cevabı bildiniz: {tutulansayi}")
             return deneme  # Doğru cevap bulunduğunda deneme sayısını döndür
-        elif secim < aralik:
+        elif secim < tutulansayi:
             print("Daha büyük bir sayı giriniz.")
         else:
             print("Daha küçük bir sayı giriniz.")
