@@ -1,26 +1,46 @@
 import random
-ist = []
-while True:
-    aralik = random.randint(1,99)
-    deneme = 1
-    for i in range(99):
-        secim = int(input("1-99 Arası bir sayı giriniz (Çıkış : 0): "))
-        if secim == aralik:
-            print(deneme, " kerede bildiniz. doğru cevap ", aralik)
-            ist.append(deneme)
-            break
-        elif secim == 0:
-            break
-        else: 
-            if secim < aralik:
-                print("küçük yazdınız")
-            elif secim > aralik:
-                print("büyük yazdınız")
-            deneme +=1
-            print(deneme, ".kez deniyorsun")
 
-    if len(ist) > 0:
-        print("\t" ,len(ist), " kere denediniz ve ortalamanız : " , sum(ist)/len(ist))
-    if secim == 0:
-        print("0 seçtiniz ve çıktınız....")
-        break
+def oyun_oyna():
+    # Bu fonksiyon her oyunu başlatacak ve deneme sayısını geri döndürecek.
+    aralik = random.randint(1, 99)
+    deneme = 0
+
+    while True:
+        try:
+            secim = int(input("1-99 Arası bir sayı giriniz (Çıkış için 0 yazın): "))
+        except ValueError:  # Geçersiz giriş
+            print("Lütfen geçerli bir sayı giriniz.")
+            continue
+
+        if secim == 0:
+            return None  # Kullanıcı çıkış yapmak istiyorsa, None döndür
+
+        deneme += 1
+        if secim == aralik:
+            print(f"Tebrikler! {deneme}. denemede doğru cevabı bildiniz: {aralik}")
+            return deneme  # Doğru cevap bulunduğunda deneme sayısını döndür
+        elif secim < aralik:
+            print("Daha büyük bir sayı giriniz.")
+        else:
+            print("Daha küçük bir sayı giriniz.")
+
+        print(f"{deneme} kez denediniz.")
+
+def main():
+    ist = []  # Deneme sayılarının listesi
+
+    while True:
+        print("\nYeni oyun başlatılıyor...")
+        deneme_sayisi = oyun_oyna()
+        if deneme_sayisi is None:
+            print("Oyundan çıkıyorsunuz.")
+            break  # Eğer çıkış yaparsa, ana döngü sonlanır
+
+        ist.append(deneme_sayisi)  # Doğru tahminde bulunulan deneme sayısını ekleyin
+
+        # Ortalama hesaplama ve gösterim
+        ortalama = sum(ist) / len(ist)
+        print(f"Şu ana kadar {len(ist)} oyun oynadınız ve ortalama deneme sayınız: {ortalama:.2f}")
+
+if __name__ == "__main__":
+    main()
